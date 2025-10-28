@@ -23,7 +23,7 @@
 
 - 🎯 **15 benchmark tasks** across retrieval, classification, paraphrase, and clustering
 - 📊 **319K test examples** (publicly released) + 1.74M train/val (planned release)
-- 🚀 **13 trained models** (67M-344M parameters) achieving SOTA on patentTEB and external benchmarks
+- 🚀 **12 trained models** (67M-344M parameters) achieving SOTA on patentTEB and external benchmarks
 - ✅ **All resources publicly available** under CC BY-NC-SA 4.0 license
 - 🔄 **MTEB integration upcoming** (PR in progress)
 
@@ -66,11 +66,9 @@ All datasets are available on HuggingFace: [huggingface.co/datalyes](https://hug
 - [`para_problem`](https://huggingface.co/datasets/datalyes/para_problem) - Problem paraphrase detection
 - [`para_solution`](https://huggingface.co/datasets/datalyes/para_solution) - Solution paraphrase detection
 
-### 🤖 Models (13 Models)
+### 🤖 Models (12 Models)
 
 All models are available on HuggingFace: [huggingface.co/datalyes](https://huggingface.co/datalyes)
-
-**Note**: Data scaling variants (nano-sp10000 through nano-sp100000) are not included in the public release.
 
 #### Core Models (6) - with prompts
 - [`patembed-large`](https://huggingface.co/datalyes/patembed-large) - 344M params, 1024-dim (flagship)
@@ -116,30 +114,6 @@ model = SentenceTransformer('datalyes/patembed-base')
 # Encode patent texts
 texts = ["A method for manufacturing semiconductor devices..."]
 embeddings = model.encode(texts)
-```
-
-### Patent Retrieval Example
-
-```python
-from sentence_transformers import SentenceTransformer, util
-
-model = SentenceTransformer('datalyes/patembed-base')
-
-# Query and candidates
-query = "Method for reducing power consumption in mobile devices"
-candidates = [
-    "A power management system for portable electronic devices...",
-    "Chemical composition for battery manufacturing...",
-]
-
-# Encode and compute similarities
-query_emb = model.encode(query)
-candidate_embs = model.encode(candidates)
-scores = util.cos_sim(query_emb, candidate_embs)[0]
-
-# Get ranked results
-for i, score in enumerate(scores):
-    print(f"Score: {score:.4f} - {candidates[i][:80]}...")
 ```
 
 ---
