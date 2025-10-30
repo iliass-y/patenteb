@@ -164,14 +164,6 @@ If you use PatenTEB datasets or models, please cite our paper:
 | Retrieval | 8 | 111,748 | NDCG@10 |
 | Paraphrase | 2 | 32,744 | Pearson r |
 
-### Model Performance Highlights
-
-| Model | Params | PatenTEB Score | BigPatent V-measure | DAPFAM NDCG@100 |
-|-------|--------|----------------|---------------------|-----------------|
-| patembed-large | 344M | 0.654 | 0.458 | 0.377 |
-| patembed-base | 193M | 0.645 | **0.494** (SOTA) | 0.369 |
-| patembed-base_small | 143M | 0.639 | 0.492 | 0.363 |
-| patembed-small | 117M | 0.625 | 0.485 | 0.353 |
 
 ---
 
