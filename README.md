@@ -24,7 +24,7 @@
 - 🎯 **15 benchmark tasks** across retrieval, classification, paraphrase, and clustering
 - 📊 **319K test examples** (publicly released) + 1.74M train/val (planned release)
 - 🚀 **12 trained models** (67M-344M parameters) achieving SOTA on patentTEB and external benchmarks
-- ✅ **All resources released on Hugging Face** under CC BY-NC-SA 4.0 license (access below)
+- ✅ **Test sets and models released on Hugging Face** under CC BY-NC-SA 4.0 license (access below)
 
 ### State-of-the-Art Results
 
