@@ -24,8 +24,7 @@
 - 🎯 **15 benchmark tasks** across retrieval, classification, paraphrase, and clustering
 - 📊 **319K test examples** (publicly released) + 1.74M train/val (planned release)
 - 🚀 **12 trained models** (67M-344M parameters) achieving SOTA on patentTEB and external benchmarks
-- ✅ **All resources publicly available** under CC BY-NC-SA 4.0 license
-- 🔄 **MTEB integration upcoming** (PR in progress)
+- ✅ **All resources released on Hugging Face** under CC BY-NC-SA 4.0 license (access below)
 
 ### State-of-the-Art Results
 
@@ -40,6 +39,8 @@
 ### 📦 Datasets (15 Tasks)
 
 All datasets are available on HuggingFace: [huggingface.co/datalyes](https://huggingface.co/datalyes)
+
+Each dataset is gated with automatic approval: accept its conditions on its page before loading it.
 
 #### Classification Tasks (3)
 - [`class_bloom`](https://huggingface.co/datasets/datalyes/class_bloom) - Citation timing classification
@@ -70,6 +71,9 @@ All datasets are available on HuggingFace: [huggingface.co/datalyes](https://hug
 
 All models are available on HuggingFace: [huggingface.co/datalyes](https://huggingface.co/datalyes)
 
+`patembed-large`, `patembed-base`, `patembed-base_small`, `patembed-base_long_4096` and
+`patembed-large_no_prompts` are open. The other seven are gated and need an approved access request.
+
 #### Core Models (6) - with prompts
 - [`patembed-large`](https://huggingface.co/datalyes/patembed-large) - 344M params, 1024-dim (flagship)
 - [`patembed-base`](https://huggingface.co/datalyes/patembed-base) - 193M params, 768-dim (recommended)
@@ -96,6 +100,7 @@ All models are available on HuggingFace: [huggingface.co/datalyes](https://huggi
 ### Load a Dataset
 
 ```python
+# Accept the dataset's conditions on Hugging Face, then log in with `hf auth login`
 from datasets import load_dataset
 
 # Load any of the 15 tasks
@@ -122,7 +127,7 @@ embeddings = model.encode(texts)
 
 **Title**: PatenTEB: A Comprehensive Benchmark and Model Family for Patent Text Embedding
 
-**Authors**: Iliass Ayaou, Denis Cavallucci (ICUBE Laboratory, INSA Strasbourg)
+**Authors**: Iliass Ayaou, Denis Cavallucci (ICube Laboratory, INSA Strasbourg)
 
 **arXiv**: [2510.22264](https://arxiv.org/abs/2510.22264)
 
@@ -181,14 +186,14 @@ All PatenTEB resources (datasets, models, code) are released under:
 ## 👥 Contact
 
 **Authors**:
-- **Iliass Ayaou** - PhD Candidate, ICUBE Laboratory
+- **Iliass Ayaou** - Postdoctoral Researcher, ICube Laboratory, INSA Strasbourg
   - Email: iliass.ayaou@insa-strasbourg.fr
   - HuggingFace: [@datalyes](https://huggingface.co/datalyes)
   
-- **Denis Cavallucci** - Professor, ICUBE Laboratory
+- **Denis Cavallucci** - Professor, ICube Laboratory
   - Email: denis.cavallucci@insa-strasbourg.fr
 
-**Institution**: ICUBE Laboratory (UMR 7357), INSA Strasbourg
+**Institution**: ICube Laboratory (UMR 7357), INSA Strasbourg
 - Address: 24 Bd de la Victoire, 67000 Strasbourg, France
 - Web: [icube.unistra.fr](https://icube.unistra.fr/)
 
@@ -201,8 +206,11 @@ All the giants and predecessors in the open source and research community on who
 
 **Related Resources**:
 - **MTEB**: Massive Text Embedding Benchmark - [github.com/embeddings-benchmark/mteb](https://github.com/embeddings-benchmark/mteb)
-- **DAPFAM**: Cross-domain patent retrieval benchmark - [arxiv.org/abs/2506.22141](https://arxiv.org/abs/2506.22141)  
-- **BERT-for-Patents**: Domain-pretrained BERT - [huggingface.co/bert-for-patents](https://huggingface.co/bert-for-patents)
+- **DAPFAM**: Cross-domain patent retrieval benchmark -
+  [Array 29, 100720 (2026)](https://doi.org/10.1016/j.array.2026.100720), preprint
+  [arxiv.org/abs/2506.22141](https://arxiv.org/abs/2506.22141). Its 18 retrieval tasks are part of
+  MTEB ([embeddings-benchmark/mteb#2946](https://github.com/embeddings-benchmark/mteb/pull/2946))
+- **BERT-for-Patents**: Domain-pretrained BERT - [huggingface.co/anferico/bert-for-patents](https://huggingface.co/anferico/bert-for-patents)
 - **Sentence Transformers**: Framework - [sbert.net](https://www.sbert.net/)
 
 ---
