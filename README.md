@@ -1,143 +1,115 @@
 # PatenTEB: A Comprehensive Benchmark and Model Family for Patent Text Embedding
 
-<div align="center">
-
 [![Paper](https://img.shields.io/badge/Paper-arXiv-red.svg)](https://arxiv.org/abs/2510.22264)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Models](https://img.shields.io/badge/🤗-Models-yellow.svg)](https://huggingface.co/datalyes)
 [![Datasets](https://img.shields.io/badge/🤗-Datasets-blue.svg)](https://huggingface.co/datalyes)
 
+Resources of the paper [PatenTEB](https://arxiv.org/abs/2510.22264) (Iliass Ayaou and Denis
+Cavallucci, 2025): a benchmark of 15 patent text embedding tasks and 12 `patembed` embedding models
+trained on it, from 67M to 344M parameters and up to 4,096 tokens of context.
 
+## Overview
 
-[Paper](https://arxiv.org/abs/2510.22264) • [Models](https://huggingface.co/datalyes) • [Datasets](https://huggingface.co/datalyes)
+- 15 tasks in four families: retrieval, classification, clustering and paraphrase.
+- 2,057,286 examples. The 319,320 test examples are released on Hugging Face. The 1,556,751 training
+  and 181,215 validation examples are not released yet.
+- 12 models on Hugging Face: 6 sizes, 3 long-context variants and 3 ablations.
 
-</div>
+Results reported in the paper:
 
----
+- 0.654 overall score on PatenTEB, `patembed-large`.
+- 0.494 V-measure on MTEB BigPatentClustering.v2, `patembed-base`. The best previous score was
+  0.445 (SFR-Embedding-2_R).
+- 0.377 NDCG@100 on DAPFAM cross-domain patent retrieval, `patembed-large`.
 
-## 📋 Overview
+## Datasets
 
-**PatenTEB** addresses a critical gap in patent text understanding by providing the first comprehensive benchmark specifically designed for patent embeddings, along with a family of state-of-the-art models.
+All 15 tasks are at [huggingface.co/datalyes](https://huggingface.co/datalyes). Each dataset is
+gated with automatic approval: accept its conditions on its page, then log in before loading it.
 
-### Key Highlights
+| Family | Task | What it tests |
+|---|---|---|
+| Classification | [`class_bloom`](https://huggingface.co/datasets/datalyes/class_bloom) | Citation timing |
+| Classification | [`class_nli_oldnew`](https://huggingface.co/datasets/datalyes/class_nli_oldnew) | Citation direction |
+| Classification | [`class_text2ipc3`](https://huggingface.co/datasets/datalyes/class_text2ipc3) | IPC3 technology class |
+| Clustering | [`clusters_ext_full_ipc`](https://huggingface.co/datasets/datalyes/clusters_ext_full_ipc) | Clusters by IPC |
+| Clustering | [`clusters_inventor`](https://huggingface.co/datasets/datalyes/clusters_inventor) | Clusters by inventor |
+| Symmetric retrieval | [`retrieval_IN`](https://huggingface.co/datasets/datalyes/retrieval_IN) | Same domain (identical IPC3) |
+| Symmetric retrieval | [`retrieval_MIXED`](https://huggingface.co/datasets/datalyes/retrieval_MIXED) | Partial IPC3 overlap |
+| Symmetric retrieval | [`retrieval_OUT`](https://huggingface.co/datasets/datalyes/retrieval_OUT) | Cross domain (disjoint IPC3) |
+| Asymmetric retrieval | [`title2full`](https://huggingface.co/datasets/datalyes/title2full) | Title to full document |
+| Asymmetric retrieval | [`problem2full`](https://huggingface.co/datasets/datalyes/problem2full) | Problem to full document |
+| Asymmetric retrieval | [`problem2solution`](https://huggingface.co/datasets/datalyes/problem2solution) | Problem to solution |
+| Asymmetric retrieval | [`effect2full`](https://huggingface.co/datasets/datalyes/effect2full) | Effect to full document |
+| Asymmetric retrieval | [`effect2substance`](https://huggingface.co/datasets/datalyes/effect2substance) | Effect to substance |
+| Paraphrase | [`para_problem`](https://huggingface.co/datasets/datalyes/para_problem) | Problem paraphrase |
+| Paraphrase | [`para_solution`](https://huggingface.co/datasets/datalyes/para_solution) | Solution paraphrase |
 
-- 🎯 **15 benchmark tasks** across retrieval, classification, paraphrase, and clustering
-- 📊 **319K test examples** (publicly released) + 1.74M train/val (planned release)
-- 🚀 **12 trained models** (67M-344M parameters) achieving SOTA on patentTEB and external benchmarks
-- ✅ **Test sets and models released on Hugging Face** under CC BY-NC-SA 4.0 license (access below)
+| Family | Tasks | Test examples | Metric |
+|---|---|---|---|
+| Retrieval | 8 | 107,110 | NDCG@10 |
+| Classification | 3 | 40,764 | Macro-F1 |
+| Clustering | 2 | 134,064 | V-measure |
+| Paraphrase | 2 | 37,382 | Pearson r |
 
-### State-of-the-Art Results
+## Models
 
-- **0.654 Overall Score** on PatenTEB (15 tasks)
-- **0.494 V-measure** on MTEB BigPatentClustering.v2 (new SOTA, previous: 0.445)
-- **0.377 NDCG@100** on DAPFAM cross-domain patent retrieval
+All 12 models are at [huggingface.co/datalyes](https://huggingface.co/datalyes). Five are open, the
+other seven are gated and need an approved access request.
 
----
+| Model | Parameters | Dimension | Access |
+|---|---|---|---|
+| [`patembed-large`](https://huggingface.co/datalyes/patembed-large) | 344M | 1024 | open |
+| [`patembed-base`](https://huggingface.co/datalyes/patembed-base) | 193M | 768 | open |
+| [`patembed-base_small`](https://huggingface.co/datalyes/patembed-base_small) | 143M | 512 | open |
+| [`patembed-small`](https://huggingface.co/datalyes/patembed-small) | 117M | 384 | gated |
+| [`patembed-mini`](https://huggingface.co/datalyes/patembed-mini) | 92M | 256 | gated |
+| [`patembed-nano`](https://huggingface.co/datalyes/patembed-nano) | 67M | 128 | gated |
+| [`patembed-base_long_1024`](https://huggingface.co/datalyes/patembed-base_long_1024) | 149M | 768 | gated |
+| [`patembed-base_long_2048`](https://huggingface.co/datalyes/patembed-base_long_2048) | 149M | 768 | gated |
+| [`patembed-base_long_4096`](https://huggingface.co/datalyes/patembed-base_long_4096) | 149M | 768 | open |
+| [`patembed-large_no_prompts`](https://huggingface.co/datalyes/patembed-large_no_prompts) | 344M | 1024 | open |
+| [`patembed-large_all_ret_only`](https://huggingface.co/datalyes/patembed-large_all_ret_only) | 344M | 1024 | gated |
+| [`patembed-large_all_no_classif`](https://huggingface.co/datalyes/patembed-large_all_no_classif) | 344M | 1024 | gated |
 
-## 🔗 Resources Index
+A `_long_N` variant reads up to N tokens. The last three are ablations: trained without task
+prompts, on the retrieval tasks only, and without the classification tasks.
 
-### 📦 Datasets (15 Tasks)
+## Quick start
 
-All datasets are available on HuggingFace: [huggingface.co/datalyes](https://huggingface.co/datalyes)
-
-Each dataset is gated with automatic approval: accept its conditions on its page before loading it.
-
-#### Classification Tasks (3)
-- [`class_bloom`](https://huggingface.co/datasets/datalyes/class_bloom) - Citation timing classification
-- [`class_nli_oldnew`](https://huggingface.co/datasets/datalyes/class_nli_oldnew) - Citation directionality  
-- [`class_text2ipc3`](https://huggingface.co/datasets/datalyes/class_text2ipc3) - IPC3 technology classification
-
-#### Clustering Tasks (2)
-- [`clusters_ext_full_ipc`](https://huggingface.co/datasets/datalyes/clusters_ext_full_ipc) - IPC-based clustering
-- [`clusters_inventor`](https://huggingface.co/datasets/datalyes/clusters_inventor) - Inventor-based clustering
-
-#### Symmetric Retrieval Tasks (3)
-- [`retrieval_IN`](https://huggingface.co/datasets/datalyes/retrieval_IN) - Same domain (identical IPC3)
-- [`retrieval_MIXED`](https://huggingface.co/datasets/datalyes/retrieval_MIXED) - Mixed domain (partial IPC3 overlap)
-- [`retrieval_OUT`](https://huggingface.co/datasets/datalyes/retrieval_OUT) - Cross domain (disjoint IPC3)
-
-#### Asymmetric Retrieval Tasks (5)
-- [`title2full`](https://huggingface.co/datasets/datalyes/title2full) - Title → Full document
-- [`problem2full`](https://huggingface.co/datasets/datalyes/problem2full) - Problem → Full document
-- [`problem2solution`](https://huggingface.co/datasets/datalyes/problem2solution) - Problem → Solution
-- [`effect2full`](https://huggingface.co/datasets/datalyes/effect2full) - Effect → Full document
-- [`effect2substance`](https://huggingface.co/datasets/datalyes/effect2substance) - Effect → Substance
-
-#### Paraphrase Tasks (2)
-- [`para_problem`](https://huggingface.co/datasets/datalyes/para_problem) - Problem paraphrase detection
-- [`para_solution`](https://huggingface.co/datasets/datalyes/para_solution) - Solution paraphrase detection
-
-### 🤖 Models (12 Models)
-
-All models are available on HuggingFace: [huggingface.co/datalyes](https://huggingface.co/datalyes)
-
-`patembed-large`, `patembed-base`, `patembed-base_small`, `patembed-base_long_4096` and
-`patembed-large_no_prompts` are open. The other seven are gated and need an approved access request.
-
-#### Core Models (6) - with prompts
-- [`patembed-large`](https://huggingface.co/datalyes/patembed-large) - 344M params, 1024-dim (flagship)
-- [`patembed-base`](https://huggingface.co/datalyes/patembed-base) - 193M params, 768-dim (recommended)
-- [`patembed-base_small`](https://huggingface.co/datalyes/patembed-base_small) - 143M params, 512-dim
-- [`patembed-small`](https://huggingface.co/datalyes/patembed-small) - 117M params, 384-dim
-- [`patembed-mini`](https://huggingface.co/datalyes/patembed-mini) - 92M params, 256-dim
-- [`patembed-nano`](https://huggingface.co/datalyes/patembed-nano) - 67M params, 128-dim
-
-#### Long-Context Models (3) - with prompts
-- [`patembed-base_long_1024`](https://huggingface.co/datalyes/patembed-base_long_1024) - 149M params, 1024 tokens
-- [`patembed-base_long_2048`](https://huggingface.co/datalyes/patembed-base_long_2048) - 149M params, 2048 tokens
-- [`patembed-base_long_4096`](https://huggingface.co/datalyes/patembed-base_long_4096) - 149M params, 4096 tokens
-
-#### Ablation Models (3)
-- [`patembed-large_no_prompts`](https://huggingface.co/datalyes/patembed-large_no_prompts) - Without prompts
-- [`patembed-large_all_ret_only`](https://huggingface.co/datalyes/patembed-large_all_ret_only) - Retrieval tasks only
-- [`patembed-large_all_no_classif`](https://huggingface.co/datalyes/patembed-large_all_no_classif) - No classification tasks
-
-
----
-
-## 🚀 Quick Start
-
-### Load a Dataset
+Load a test set (after accepting its conditions on Hugging Face and running `hf auth login`):
 
 ```python
-# Accept the dataset's conditions on Hugging Face, then log in with `hf auth login`
 from datasets import load_dataset
 
-# Load any of the 15 tasks
-dataset = load_dataset("datalyes/class_bloom")
-test_data = dataset['test']
+test = load_dataset("datalyes/class_bloom")["test"]
 ```
 
-### Use a Model
+Encode texts. The models were trained with one prompt per task, listed in each model's
+`config_sentence_transformers.json`. Pass the prompt of your task:
 
 ```python
 from sentence_transformers import SentenceTransformer
 
-# Load any patembed model (most use prompts automatically)
-model = SentenceTransformer('datalyes/patembed-base')
-
-# Encode patent texts
-texts = ["A method for manufacturing semiconductor devices..."]
-embeddings = model.encode(texts)
+model = SentenceTransformer("datalyes/patembed-base")
+embeddings = model.encode(
+    ["A method for manufacturing semiconductor devices..."],
+    prompt="encode document for ipc classification: ",
+)
 ```
 
----
+For the retrieval and paraphrase tasks, queries and documents have different prompts: encode each
+side with its own.
 
-## 📄 Paper
+## Paper
 
-**Title**: PatenTEB: A Comprehensive Benchmark and Model Family for Patent Text Embedding
-
-**Authors**: Iliass Ayaou, Denis Cavallucci (ICube Laboratory, INSA Strasbourg)
-
-**arXiv**: [2510.22264](https://arxiv.org/abs/2510.22264)
-
-### Citation
-
-If you use PatenTEB datasets or models, please cite our paper:
+Iliass Ayaou and Denis Cavallucci. PatenTEB: A Comprehensive Benchmark and Model Family for Patent
+Text Embedding. arXiv:2510.22264, 2025.
 
 ```bibtex
 @misc{ayaou2025patentebcomprehensivebenchmarkmodel,
-      title={PatenTEB: A Comprehensive Benchmark and Model Family for Patent Text Embedding}, 
+      title={PatenTEB: A Comprehensive Benchmark and Model Family for Patent Text Embedding},
       author={Iliass Ayaou and Denis Cavallucci},
       year={2025},
       eprint={2510.22264},
@@ -147,80 +119,27 @@ If you use PatenTEB datasets or models, please cite our paper:
 }
 ```
 
----
+## License
 
-## 📊 Benchmark Details
+The datasets and models are released under
+[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-### Dataset Statistics
+## Contact
 
-| Split | Examples | Status |
-|-------|----------|--------|
-| **Test** | **319,320** | **✅ Released** |
-| Train | 1,556,751 | 📅 Planned (future release) |
-| Validation | 181,215 | 📅 Planned (future release) |
-| **Total** | **2,057,286** | |
+- Iliass Ayaou, postdoctoral researcher, ICube laboratory, INSA Strasbourg:
+  iliass.ayaou@insa-strasbourg.fr
+- Denis Cavallucci, professor, ICube laboratory, INSA Strasbourg: denis.cavallucci@insa-strasbourg.fr
 
-### Task Distribution
+ICube laboratory (UMR 7357), INSA Strasbourg, 24 Bd de la Victoire, 67000 Strasbourg, France.
 
-| Task Family | # Tasks | Test Examples | Metrics |
-|-------------|---------|---------------|---------|
-| Classification | 3 | 40,764 | Macro-F1 |
-| Clustering | 2 | 134,064 | V-measure |
-| Retrieval | 8 | 111,748 | NDCG@10 |
-| Paraphrase | 2 | 32,744 | Pearson r |
+## Related resources
 
-
----
-
-
-## 📜 License
-
-All PatenTEB resources (datasets, models, code) are released under:
-
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
-**Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International**
-
----
-
-## 👥 Contact
-
-**Authors**:
-- **Iliass Ayaou** - Postdoctoral Researcher, ICube Laboratory, INSA Strasbourg
-  - Email: iliass.ayaou@insa-strasbourg.fr
-  - HuggingFace: [@datalyes](https://huggingface.co/datalyes)
-  
-- **Denis Cavallucci** - Professor, ICube Laboratory
-  - Email: denis.cavallucci@insa-strasbourg.fr
-
-**Institution**: ICube Laboratory (UMR 7357), INSA Strasbourg
-- Address: 24 Bd de la Victoire, 67000 Strasbourg, France
-- Web: [icube.unistra.fr](https://icube.unistra.fr/)
-
----
-
-## 🙏 Acknowledgments
-
-**Data Source**: Initial Raw Patent data sourced from [Lens.org](https://lens.org).
-All the giants and predecessors in the open source and research community on whose shoulders this work stands, thank you.
-
-**Related Resources**:
-- **MTEB**: Massive Text Embedding Benchmark - [github.com/embeddings-benchmark/mteb](https://github.com/embeddings-benchmark/mteb)
-- **DAPFAM**: Cross-domain patent retrieval benchmark -
-  [Array 29, 100720 (2026)](https://doi.org/10.1016/j.array.2026.100720), preprint
-  [arxiv.org/abs/2506.22141](https://arxiv.org/abs/2506.22141). Its 18 retrieval tasks are part of
-  MTEB ([embeddings-benchmark/mteb#2946](https://github.com/embeddings-benchmark/mteb/pull/2946))
-- **BERT-for-Patents**: Domain-pretrained BERT - [huggingface.co/anferico/bert-for-patents](https://huggingface.co/anferico/bert-for-patents)
-- **Sentence Transformers**: Framework - [sbert.net](https://www.sbert.net/)
-
----
-
-<div align="center">
-
-**PatenTEB** | Advancing Patent Text Understanding Through Comprehensive Evaluation
-
-[Paper](https://arxiv.org/abs/2510.22264) • [Models](https://huggingface.co/datalyes) • [Datasets](https://huggingface.co/datalyes) • [GitHub](https://github.com/iliass-y/patenteb)
-
-
-
-</div>
+- Raw patent data: [Lens.org](https://www.lens.org).
+- [DAPFAM](https://doi.org/10.1016/j.array.2026.100720), the cross-domain patent retrieval benchmark
+  (Array 29, 100720, 2026, preprint [arXiv:2506.22141](https://arxiv.org/abs/2506.22141)). Its 18
+  retrieval tasks are part of MTEB
+  ([embeddings-benchmark/mteb#2946](https://github.com/embeddings-benchmark/mteb/pull/2946)).
+- [MTEB](https://github.com/embeddings-benchmark/mteb), the Massive Text Embedding Benchmark.
+- [BERT for Patents](https://huggingface.co/anferico/bert-for-patents), a BERT model pretrained on
+  patents.
+- [Sentence Transformers](https://www.sbert.net/).
